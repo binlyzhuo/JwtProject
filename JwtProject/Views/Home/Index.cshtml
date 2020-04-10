@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script type="text/javascript" src="~/scripts/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="~/scripts/jquery.md5.js"></script>
+    <script type="text/javascript" src="~/scripts/base64.min.js"></script>
+    <script type="text/javascript">
+        var num = "123456";
+        var encrypt = $.md5(num);
+        //alert(encrypt);
+        alert(Base64.md5(num));
+        function login() {
+            var uid = "admin";
+            var pwd = "123456";
+
+            var token = Base64.encode(uid) + "." + Base64.encode(pwd);
+
+            $.post('/home/login', { token: Base64.encode(token) }, function (rsp) {
+
+            });
+        }
+    </script>
+</head>
+<body>
+    <div> 
+        <a href="/home/token">Set Token</a>
+        <br />
+        <a href="/home/gettoken">Get Token</a>
+        <br />
+        <input type="button" value="Login" onclick="login();" />
+    </div>
+</body>
+</html>
